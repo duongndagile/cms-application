@@ -1,9 +1,29 @@
 .container {
-    border: 1px solid #333;
+    border: 2px solid #3792CB;
+    border-radius: 10px;
 }
 
 .contentLeft {
-    border-right: 1px solid #333;
+    border-right: 2px solid #3792CB;
+    padding: 0 !important;
 }
 
-.contentRight {}
+.contentRight {
+    border-bottom: 2px solid #3792CB;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logoContent {
+    height: 36px;
+    border-bottom: 2px solid #3792CB;
+}
+
+.username {
+    border-right: 1px solid #333;
+    padding-right: 16px;
+}
+
+.textLogout:hover {
+    color: #3792CB;
+}

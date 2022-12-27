@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#00AB55",
+      main: "#3792CB",
     },
   },
   typography: {
@@ -140,11 +140,11 @@ export const theme = createTheme({
         {
           props: { variant: "contained" },
           style: {
-            boxShadow: "0px 8px 16px rgba(0, 171, 85, 0.24)",
+            boxShadow: "0px 4px 8px #B1F2FF",
             "&:hover": {
               opacity: 0.75,
-              backgroundColor: "#00AB55",
-              boxShadow: "0px 8px 16px rgba(0, 171, 85, 0.24)",
+              backgroundColor: "#3792CB",
+              boxShadow: "0px 4px 8px #B1F2FF",
             },
           },
         },
