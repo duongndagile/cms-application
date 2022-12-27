@@ -1,0 +1,9 @@
+.container {
+    border: 1px solid #333;
+}
+
+.contentLeft {
+    border-right: 1px solid #333;
+}
+
+.contentRight {}
