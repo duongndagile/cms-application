@@ -1,12 +1,19 @@
 import axios from "axios";
 import { appLocalStorage } from "../helpers/localstorage.helper";
-
 const JWT_LOCAL_STORAGE_KEY = import.meta.env.JWT_LOCAL_STORAGE_KEY ?? "jwt";
 
-export const connectionInstance = axios.create({
-  baseURL: "https://mini-center.agiletech.vn",
-  timeout: 1000 * 30,
+export const BASE_URL = "https://mini-center.agiletech.vn";
+const REQUEST_TIMEOUT = 1000 * 15;
+
+export const mini_center_apis = axios.create({
+  baseURL: BASE_URL,
+  timeout: REQUEST_TIMEOUT,
 });
+
+export const getAccessToken = () => {
+  const token = appLocalStorage.getItem(JWT_LOCAL_STORAGE_KEY);
+  return token;
+};
 
 axios.interceptors.request.use(
   (config: any) => {
@@ -28,11 +35,11 @@ axios.interceptors.response.use(
 );
 
 export const setToken = (token: string) => {
-  connectionInstance.defaults.headers.common["Authorization"] = token;
+  mini_center_apis.defaults.headers.common["Authorization"] = token;
   appLocalStorage.setItem(JWT_LOCAL_STORAGE_KEY, token);
 };
 
 export const removeToken = () => {
   appLocalStorage.removeItem(JWT_LOCAL_STORAGE_KEY);
-  delete connectionInstance.defaults.headers.common["Authorization"];
+  delete mini_center_apis.defaults.headers.common["Authorization"];
 };

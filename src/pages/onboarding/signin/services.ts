@@ -1,18 +1,19 @@
-import { connectionInstance } from "../../../apis/connection.instance";
+import { API_PATH } from "../../../apis/request";
+import { mini_center_apis } from "../../../apis/connection.instance";
+import { Request } from "../../../apis/request";
 
-export const serviceSignIn = (username: string, password: string) => {
-  try {
-    const res = connectionInstance({
-      url: "/authorization/sign_in",
-      method: "post",
-      data: {
-        emailOrPhone: username,
-        password: password,
-      },
-    });
-    console.log("res", res);
-    return res;
-  } catch (error) {
-    Promise.reject(error);
-  }
+interface SignInBody {
+  emailOrPhone: string;
+  password: string;
+}
+
+export const signIn = (input: SignInBody) => {
+  return mini_center_apis({
+    method: Request.POST,
+    url: API_PATH.AUTHORIZATION_SIGN_IN,
+    data: {
+      emailOrPhone: input.emailOrPhone,
+      password: input.password,
+    },
+  });
 };

@@ -2,6 +2,7 @@ import { Checkbox } from "@mui/material";
 import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
+import { getAccessToken } from "../../../../apis/connection.instance";
 
 const rows = [
   { version: "version 1.0.0", createdAt: "2020-01-01", id: 1, isActive: false },
@@ -39,7 +40,8 @@ const MiniAppContent = () => {
   ];
 
   const handleUploadVersion = () => {
-    console.log("upload file");
+    const token = getAccessToken();
+    console.log("upload file", token);
   };
 
   return (
