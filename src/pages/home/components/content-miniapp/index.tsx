@@ -1,4 +1,4 @@
-import { Checkbox } from "@mui/material";
+import { Checkbox, Typography } from "@mui/material";
 import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -23,9 +23,9 @@ const MiniAppContent = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "STT", width: 50 },
-    { field: "version", headerName: "Version", width: 250 },
-    { field: "createdAt", headerName: "Ngày tạo", width: 250 },
+    { field: "id", headerName: "STT", width: 60 },
+    { field: "version", headerName: "Version", width: 200 },
+    { field: "createdAt", headerName: "Ngày tạo", width: 200 },
     {
       field: "isActive",
       headerName: "Active",

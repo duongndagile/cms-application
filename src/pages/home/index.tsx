@@ -6,7 +6,8 @@ import { getAccessToken, removeToken } from "../../apis/connection.instance";
 import BeforeAuthentication from "./components/content-before-authen";
 import { serviceUserProfile } from "./services";
 import { Suspense, useEffect, useState } from "react";
-import Organization from "./components/register-organization";
+// import Organization from "./components/register-organization";
+import Sidebar from "../../components/app-menu";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,6 +28,9 @@ const HomePage = () => {
       });
     }
   }, []);
+
+  const full_name =
+    profile?.user_profile?.last_name + profile?.user_profile?.first_name;
   const handleLogout = () => {
     removeToken();
     history("/");
@@ -42,19 +46,31 @@ const HomePage = () => {
       <Grid
         container
         spacing={2}
-        width="1024px"
         display="flex"
         justifyContent="space-between"
         className={styles.container}
       >
         <Grid xs={2} className={styles.contentLeft}>
-          <Item className={styles.logoContent}>
-            <Typography>Application Logo</Typography>
-          </Item>
-          <Typography margin={[2]}>Mini App</Typography>
+          <Box className={styles.logoContent}>
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              sx={{ ml: 2 }}
+            >
+              <Box>Avatar</Box>
+              <Box textAlign="left" sx={{ ml: 2 }}>
+                <Typography typography="subtitle1">{full_name}</Typography>
+                <Typography typography="body3">
+                  {profile?.role?.name}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Sidebar />
         </Grid>
         <Grid xs={10}>
-          <Item className={styles.contentRight}>
+          <Box className={styles.contentRight}>
             <Box
               display="flex"
               alignItems="center"
@@ -65,16 +81,14 @@ const HomePage = () => {
               <Typography color="#3792CB">{`${profile?.user_profile?.last_name} ${profile?.user_profile?.first_name}`}</Typography>
             </Box>
             <Button onClick={handleLogout}>
-              <Typography margin={1} className={styles.textLogout}>
-                Đăng xuất
-              </Typography>
+              <Typography className={styles.textLogout}>Đăng xuất</Typography>
               {/* <img src={iconLogout} /> */}
             </Button>
-          </Item>
+          </Box>
           <MiniAppContent />
         </Grid>
       </Grid>
-      <Organization />
+      {/* <Organization /> */}
     </>
   );
 };
