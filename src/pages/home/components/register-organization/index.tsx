@@ -1,13 +1,7 @@
-import {
-  Button,
-  FormControl,
-  Input,
-  InputLabel,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Form, { Field, useForm } from "rc-field-form";
+import { registerOrganization } from "../../services";
 
 const Organization = () => {
   const [form] = useForm();
@@ -16,10 +10,16 @@ const Organization = () => {
       <Typography typography="h5" sx={{ mt: 2, mb: 2 }}>
         Organization Register
       </Typography>
-      <Form form={form} onFinish={(values) => console.log(values)}>
-        <Field name="organization_name">
+      <Form
+        form={form}
+        onFinish={(values) => {
+          registerOrganization(values.name);
+          console.log(values);
+        }}
+      >
+        <Field name="name">
           <TextField
-            id="organization_name"
+            id="name"
             placeholder="Enter organization name..."
             sx={{ mt: 5, mb: 5 }}
             fullWidth

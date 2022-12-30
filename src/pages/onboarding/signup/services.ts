@@ -1,4 +1,5 @@
 import { mini_center_apis } from "../../../apis/connection.instance";
+import { API_PATH, privateRequest } from "../../../apis/request";
 
 interface ISignUpProps {
   first_name: string;
@@ -9,7 +10,7 @@ interface ISignUpProps {
   onSuccess: () => void;
 }
 
-export const serviceSignUp = async (props: ISignUpProps) => {
+export const serviceSignUp1 = async (props: ISignUpProps) => {
   try {
     const res = await mini_center_apis({
       url: "/authorization/sign_up",
@@ -27,4 +28,20 @@ export const serviceSignUp = async (props: ISignUpProps) => {
   } catch (error) {
     Promise.reject(error);
   }
+};
+
+export const serviceSignUp = async (props: ISignUpProps) => {
+  const res = await privateRequest(
+    mini_center_apis.post,
+    API_PATH.AUTHORIZATION_SIGN_UP,
+    {
+      email: props.email,
+      phone: props.phone,
+      password: props.password,
+      first_name: props.first_name,
+      last_name: props.last_name,
+    }
+  );
+  props.onSuccess();
+  return res;
 };

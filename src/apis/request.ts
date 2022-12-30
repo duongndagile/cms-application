@@ -35,18 +35,15 @@ export const injectBearer = (token: string, configs: any) => {
   }
   return {
     ...configs,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   };
 };
 
-export const privateRequest = (
+export const privateRequest = async (
   request: any,
   prefixUrl: string,
   configs?: any
 ) => {
-  const token = configs?.token || getAccessToken();
+  const token = configs?.token || (getAccessToken() as string);
   const url = API_URL + prefixUrl;
   return request(url, injectBearer(token, configs));
 };
