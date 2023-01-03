@@ -20,6 +20,7 @@ import { validator } from "../../../utils/validate";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { getAccessToken, setToken } from "../../../apis/connection.instance";
 import Form, { Field, useForm } from "rc-field-form";
+import { useAuthenticationState } from "../../../atoms/authentication";
 
 const regexEmail =
   '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/';
@@ -31,6 +32,8 @@ const SignIn = () => {
     emailOrPhone: "",
     password: "",
   });
+
+  const [, setAuthorized] = useAuthenticationState();
 
   const [validateEmail, setValidateEmail] = useState(false);
   const history = useNavigate();
@@ -61,6 +64,7 @@ const SignIn = () => {
       });
       const token = await res.data?.token;
       setToken(token);
+      setAuthorized({ authorized: true });
       history("/");
     }
   };

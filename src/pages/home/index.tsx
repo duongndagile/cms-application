@@ -10,6 +10,7 @@ import { Suspense, useEffect, useState } from "react";
 import Sidebar from "../../components/app-menu";
 import { MainMenu } from "../../layouts/main-menu/MainMenu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Organization from "./components/register-organization";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -44,7 +45,7 @@ const HomePage = () => {
     return <Suspense fallback={<>Loading...</>} />;
   }
   return (
-    <MainMenu>
+    <MainMenu profile={profile}>
       <Grid
         container
         spacing={2}
@@ -69,7 +70,6 @@ const HomePage = () => {
               </Box>
             </Box>
           </Box>
-          {/* <Sidebar /> */}
         </Grid>
         <Grid xs={10}>
           <Box className={styles.contentRight}>
@@ -87,10 +87,8 @@ const HomePage = () => {
               {/* <img src={iconLogout} /> */}
             </Button>
           </Box>
-          {/* <MiniAppContent /> */}
         </Grid>
       </Grid>
-      {/* <Organization /> */}
     </MainMenu>
   );
 };

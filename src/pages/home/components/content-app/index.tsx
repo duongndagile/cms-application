@@ -5,10 +5,11 @@ import { NoContentYet } from "./components/NoContentYet";
 import { OrganizationManager } from "./components/OrganizationManager";
 import { MiniBundleManager } from "./components/MiniBundleManager";
 import { UserManual } from "./components/UserManual";
+import { RegisterMiniApp } from "./components/RegisterMiniApp";
+import Organization from "../register-organization";
 
 const MiniAppContent = (props: any) => {
-  const { value } = props;
-
+  const { value, profile } = props;
   const getContentTab = () => {
     let content;
     switch (value) {
@@ -17,8 +18,14 @@ const MiniAppContent = (props: any) => {
       case 111:
         return (content = <NoContentYet />);
       case 22:
+        if (profile?.profile?.role?.name === "USER") {
+          return (content = <Organization />);
+        }
         return (content = <OrganizationManager />);
       case 222:
+        if (profile?.profile?.role?.name === "USER") {
+          return (content = <RegisterMiniApp />);
+        }
         return (content = <MiniAppManager />);
       case 2222:
         return (content = <MiniBundleManager />);

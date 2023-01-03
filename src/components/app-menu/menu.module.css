@@ -8,6 +8,10 @@
     padding: 0 26px;
 }
 
+.tabLabelActive {
+    color: "#0288d1" !important
+}
+
 .tabStyle:focus {
     outline: 0;
 }

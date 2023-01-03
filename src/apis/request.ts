@@ -55,6 +55,17 @@ export const API_PATH = {
 
   // organization
   ORGANIZATION_REGISTER: "/organization/register",
+  ORGANIZATION_APPROVE: (organization_id: number) =>
+    `/organization/register/approve/${organization_id}`,
+
+  // mini app
+  MINI_APP_REGISTER: "/organization/register/mini_app",
+  MINI_APP_APPROVE: (mini_app_id: number) =>
+    `/organization/register/mini-app/${mini_app_id}`,
+
+  // upload mini app
+  MINI_APP_UPLOAD: (organization_id: number, mini_app_id: number) =>
+    `/organization/mini_app/upload/${organization_id}/${mini_app_id}`,
 
   // user
   USER_PROFILE: "/user/profile",

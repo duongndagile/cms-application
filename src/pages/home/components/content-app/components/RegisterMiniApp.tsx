@@ -1,18 +1,19 @@
-import { Button, Checkbox, TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Button, Checkbox, TextField, Typography } from "@mui/material";
+import styles from "../index.module.css";
 import Form, { Field, useForm } from "rc-field-form";
-import { registerOrganization } from "../../services";
-import styles from "./index.module.css";
+import { registerMiniApp } from "../../../services";
 
-const Organization = () => {
+export const RegisterMiniApp = () => {
   const [form] = useForm();
+
   const handleSubmit = (values: any) => {
-    registerOrganization(values.name);
+    registerMiniApp(values.name);
   };
+
   return (
     <Box width={685} className={styles.registerContainer}>
       <Typography variant="h4" textAlign="left">
-        Đăng ký trở thành đối tác của Mini Center
+        Đăng ký Mini App
       </Typography>
       <Typography textAlign="left" marginTop={2} marginBottom={4}>
         Đăng ký miễn phí trọn đời
@@ -22,28 +23,21 @@ const Organization = () => {
           <Field name="name">
             <TextField
               required
+              fullWidth
               id="name"
-              label="Tên Công Ty"
+              label="Tên Mini App"
               autoFocus
-              className={styles.inputStyle}
-            />
-          </Field>
-          <Field name="phone">
-            <TextField
-              required
-              id="phone_number"
-              label="Số điện thoại"
               className={styles.inputStyle}
             />
           </Field>
         </Box>
         <Box className={styles.boxInput}>
-          <Field name="email">
+          <Field name="description">
             <TextField
               fullWidth
               required
-              id="email"
-              label="Email"
+              id="description"
+              label="Mô tả"
               className={styles.inputStyle}
             />
           </Field>
@@ -74,5 +68,3 @@ const Organization = () => {
     </Box>
   );
 };
-
-export default Organization;

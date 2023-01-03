@@ -1,7 +1,14 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { Box, Icon, Tab, Tabs, Typography } from "@mui/material";
+import { useMemo, useState } from "react";
 import styles from "./menu.module.css";
 import MiniAppContent from "../../pages/home/components/content-app";
+import { ROUTE_PATH } from "../../utils/common";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import AppsIcon from "@mui/icons-material/Apps";
+import BuildCircleIcon from "@mui/icons-material/BuildCircle";
+import DescriptionIcon from "@mui/icons-material/Description";
+import HelpIcon from "@mui/icons-material/Help";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,7 +43,7 @@ function a11yProps(index: number) {
   };
 }
 
-const Sidebar = () => {
+const Sidebar = (profile: any) => {
   const [idActive, setIdActiveTab] = useState<number>(222);
   const MENU = useMemo(() => {
     return [
@@ -47,10 +54,18 @@ const Sidebar = () => {
           {
             id: 11,
             label: "Thống kê",
+            icon: <BarChartIcon />,
+            iconActive: <BarChartIcon color="info" />,
+            role: "USER",
+            path: ROUTE_PATH.STATISTIC,
           },
           {
             id: 111,
             label: "Chưa biết để thêm gì",
+            icon: <HelpIcon />,
+            iconActive: <HelpIcon color="info" />,
+            role: "USER",
+            path: "some-things",
           },
         ],
       },
@@ -61,18 +76,34 @@ const Sidebar = () => {
           {
             id: 22,
             label: "Quản lý Organization",
+            icon: <CorporateFareIcon />,
+            iconActive: <CorporateFareIcon color="info" />,
+            role: "ADMIN",
+            path: ROUTE_PATH.ORGANIZATION,
           },
           {
             id: 222,
             label: "Quản lý Mini App",
+            icon: <AppsIcon />,
+            iconActive: <AppsIcon color="info" />,
+            role: "ADMIN",
+            path: ROUTE_PATH.MINI_APP,
           },
           {
             id: 2222,
             label: "Quản lý Mini Bundle",
+            icon: <BuildCircleIcon />,
+            iconActive: <BuildCircleIcon color="info" />,
+            role: "ADMIN",
+            path: ROUTE_PATH.MINI_BUNDLE,
           },
           {
             id: 22222,
             label: "Hướng dẫn sử dụng",
+            icon: <DescriptionIcon />,
+            iconActive: <DescriptionIcon color="info" />,
+            role: "USER",
+            path: ROUTE_PATH.USER_MANUAL,
           },
         ],
       },
@@ -98,19 +129,45 @@ const Sidebar = () => {
               <Tabs
                 orientation="vertical"
                 value={idActive}
-                onChange={handleChange}
+                // onChange={handleChange}
               >
-                {menu.children.map((child) => {
+                {menu.children.map((child: any) => {
+                  const icon =
+                    idActive === child.id ? child.iconActive : child.icon;
+                  // if (profile?.profile?.role?.name === "USER") {
+                  //   if (child.role === "ADMIN") {
+                  //     return (child = null);
+                  //   }
+                  // }
                   return (
-                    <Tab
-                      key={child.id}
-                      sx={{ ml: 1, mt: 2 }}
-                      label={child.label}
-                      value={child.id}
-                      className={styles.tabStyle}
-                      {...a11yProps(child.id)}
-                      // onClick={() => setIdActiveTab(child.id)}
-                    />
+                    <Box
+                      display="flex"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      marginLeft={4}
+                      onClick={() => {
+                        setIdActiveTab(child.id);
+                      }}
+                    >
+                      <Box marginTop={2}>{icon}</Box>
+                      <Tab
+                        key={child.id}
+                        sx={{ mt: 2 }}
+                        label={
+                          <Typography
+                            color={
+                              idActive === child.id ? "#2F80ED" : "#333333"
+                            }
+                            fontWeight={idActive === child.id ? 700 : 400}
+                          >
+                            {child.label}
+                          </Typography>
+                        }
+                        value={child.id}
+                        className={styles.tabStyle}
+                        {...a11yProps(child.id)}
+                      />
+                    </Box>
                   );
                 })}
               </Tabs>
@@ -118,7 +175,7 @@ const Sidebar = () => {
           );
         })}
         <TabPanel value={idActive} index={idActive}>
-          <MiniAppContent value={idActive} />
+          <MiniAppContent value={idActive} profile={profile} />
         </TabPanel>
       </>
     );
