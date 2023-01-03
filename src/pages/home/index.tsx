@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Typography, Paper, styled } from "@mui/material";
 import styles from "./home.module.css";
-import MiniAppContent from "./components/content-miniapp";
+import MiniAppContent from "./components/content-app";
 import { useNavigate } from "react-router-dom";
 import { getAccessToken, removeToken } from "../../apis/connection.instance";
 import BeforeAuthentication from "./components/content-before-authen";
@@ -8,6 +8,8 @@ import { serviceUserProfile } from "./services";
 import { Suspense, useEffect, useState } from "react";
 // import Organization from "./components/register-organization";
 import Sidebar from "../../components/app-menu";
+import { MainMenu } from "../../layouts/main-menu/MainMenu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -42,7 +44,7 @@ const HomePage = () => {
     return <Suspense fallback={<>Loading...</>} />;
   }
   return (
-    <>
+    <MainMenu>
       <Grid
         container
         spacing={2}
@@ -58,7 +60,7 @@ const HomePage = () => {
               alignItems="center"
               sx={{ ml: 2 }}
             >
-              <Box>Avatar</Box>
+              <AccountCircleIcon fontSize="large" />
               <Box textAlign="left" sx={{ ml: 2 }}>
                 <Typography typography="subtitle1">{full_name}</Typography>
                 <Typography typography="body3">
@@ -67,7 +69,7 @@ const HomePage = () => {
               </Box>
             </Box>
           </Box>
-          <Sidebar />
+          {/* <Sidebar /> */}
         </Grid>
         <Grid xs={10}>
           <Box className={styles.contentRight}>
@@ -85,11 +87,11 @@ const HomePage = () => {
               {/* <img src={iconLogout} /> */}
             </Button>
           </Box>
-          <MiniAppContent />
+          {/* <MiniAppContent /> */}
         </Grid>
       </Grid>
       {/* <Organization /> */}
-    </>
+    </MainMenu>
   );
 };
 

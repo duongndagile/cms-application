@@ -1,0 +1,26 @@
+.itemContainer {
+    position: absolute;
+    top: 86px;
+    width: 224px;
+}
+
+.itemMenu {
+    padding: 0 26px;
+}
+
+.tabStyle:focus {
+    outline: 0;
+}
+
+.tabPanelStyle {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.css-19kzrtu {
+    padding: 0 58px;
+}

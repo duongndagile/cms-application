@@ -1,8 +1,7 @@
-import { Checkbox, Typography } from "@mui/material";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Checkbox } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { getAccessToken } from "../../../../../apis/connection.instance";
 import { useState } from "react";
-import { getAccessToken } from "../../../../apis/connection.instance";
 
 const rows = [
   { version: "version 1.0.0", createdAt: "2020-01-01", id: 1, isActive: false },
@@ -12,16 +11,7 @@ const rows = [
   { version: "version 2.1.0", createdAt: "2022-06-01", id: 5, isActive: true },
 ];
 
-const MiniAppContent = () => {
-  const [active, setActive] = useState<boolean>(false);
-  const handleShowModalConfirm = (idRow: any) => {
-    console.log(idRow);
-    const id = rows.map((row: any) => row.id);
-    if (idRow === id) {
-      setActive(!active);
-    }
-  };
-
+export const MiniAppManager = () => {
   const columns: GridColDef[] = [
     { field: "id", headerName: "STT", width: 60 },
     { field: "version", headerName: "Version", width: 200 },
@@ -39,6 +29,15 @@ const MiniAppContent = () => {
     },
   ];
 
+  const [active, setActive] = useState<boolean>(false);
+
+  const handleShowModalConfirm = (idRow: any) => {
+    console.log(idRow);
+    const id = rows.map((row: any) => row.id);
+    if (idRow === id) {
+      setActive(!active);
+    }
+  };
   const handleUploadVersion = () => {
     const token = getAccessToken();
     console.log("upload file", token);
@@ -68,5 +67,3 @@ const MiniAppContent = () => {
     </Box>
   );
 };
-
-export default MiniAppContent;

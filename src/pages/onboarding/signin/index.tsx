@@ -33,7 +33,6 @@ const SignIn = () => {
   });
 
   const [validateEmail, setValidateEmail] = useState(false);
-  const token = getAccessToken();
   const history = useNavigate();
 
   useEffect(() => {
